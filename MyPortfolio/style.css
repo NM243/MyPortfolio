@@ -313,6 +313,89 @@ header.site-header.scrolled {
   margin-bottom: 2.5rem;
 }
 
+/* ===== À propos (photo en arrière-plan) ===== */
+.apropos {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: flex-end;
+  margin: 1rem 0 5rem;
+  background: var(--surface) url('images/emmanuel.jpeg') center / cover no-repeat;
+  overflow: hidden;
+}
+
+.apropos::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8, 11, 18, 0.9) 0%, rgba(8, 11, 18, 0.45) 55%, rgba(8, 11, 18, 0.15) 100%);
+}
+
+.apropos-overlay {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  box-sizing: border-box;
+  color: #F4F6FB;
+}
+
+.apropos-eyebrow {
+  color: #BFD0FF;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.apropos-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 0.9rem;
+}
+
+.apropos-text {
+  max-width: 62ch;
+  color: #D7DEEC;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .apropos { min-height: 280px; }
+}
+
+/* Le bandeau photo et le texte qui le suit forment un seul bloc "À propos" */
+.apropos + section {
+  padding-top: 2.5rem;
+}
+
+/* ===== About text block ===== */
+.about-text {
+  max-width: 68ch;
+}
+
+.about-text p {
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+  color: var(--text);
+  font-weight: 500;
+  border-left: 3px solid var(--primary);
+  padding-left: 1rem;
+}
+
+.about-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
 /* ===== Services ===== */
 .service-grid {
   display: grid;
