@@ -21,6 +21,51 @@ toggleBtn.addEventListener('click', () => {
   applyTheme(next);
 });
 
+// ===== Multilingue (FR / EN) =====
+const langToggle = document.getElementById('lang-toggle');
+
+function getTranslation(key, lang) {
+  const parts = key.split('.');
+  let node = translations[lang];
+  for (const part of parts) {
+    if (node === undefined) return undefined;
+    node = node[part];
+  }
+  return node;
+}
+
+function applyLang(lang) {
+  root.setAttribute('lang', lang);
+  localStorage.setItem('lang', lang);
+
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const value = getTranslation(el.getAttribute('data-i18n'), lang);
+    if (value !== undefined) el.innerHTML = value;
+  });
+
+  document.querySelectorAll('[data-i18n-aria]').forEach((el) => {
+    const value = getTranslation(el.getAttribute('data-i18n-aria'), lang);
+    if (value !== undefined) el.setAttribute('aria-label', value);
+  });
+
+  if (langToggle) langToggle.textContent = lang === 'fr' ? 'EN' : 'FR';
+}
+
+function getPreferredLang() {
+  return localStorage.getItem('lang') || 'fr';
+}
+
+if (typeof translations !== 'undefined') {
+  applyLang(getPreferredLang());
+}
+
+if (langToggle) {
+  langToggle.addEventListener('click', () => {
+    const current = root.getAttribute('lang') || 'fr';
+    applyLang(current === 'fr' ? 'en' : 'fr');
+  });
+}
+
 // ===== Footer year =====
 document.getElementById('year').textContent = new Date().getFullYear();
 
